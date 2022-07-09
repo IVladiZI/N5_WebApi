@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
 
 namespace N5.Core.Entities
 {
-    public class Permission
+    public partial class Permission
     {
-        public int Id{ get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public int TypePermission { get; set; }
-        public DateTime Date { get; set; }
+        public long IdTypePermission { get; set; }
+        public DateTime? Date { get; set; }
+
+        public virtual TypePermission TypePermission { get; set; }
     }
 }
