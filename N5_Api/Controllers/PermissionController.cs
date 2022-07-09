@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using N5.Infrastructure.Repositories;
+using N5.Core.Interfaces;
+using System.Threading.Tasks;
 
 namespace N5.Api.Controllers
 {
@@ -7,10 +8,15 @@ namespace N5.Api.Controllers
     [ApiController]
     public class PermissionController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IPermissionRepository _permissionRepository;
+        public PermissionController(IPermissionRepository permissionRepository)
         {
-            var post = new PostReporitory().GetPosts();
+            _permissionRepository = permissionRepository;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var post = await _permissionRepository.Get();
             return Ok(post);
         }
     }
