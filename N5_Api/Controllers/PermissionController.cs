@@ -16,8 +16,8 @@ namespace N5.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var post = await _permissionRepository.Get();
-            return Ok(post);
+            var getPermission = await _permissionRepository.Get();
+            return Ok(getPermission);
         }
     }
 }
