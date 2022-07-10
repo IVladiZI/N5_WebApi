@@ -22,5 +22,33 @@ namespace N5.Infrastructure.Repositories
             var permissionGet = await _n5_DBContext.Permissions.ToListAsync();
             return permissionGet;
 ;       }
+        public async Task<Permission> Get(long id)
+        {
+            var permissionGet = await _n5_DBContext.Permissions.FindAsync(id);
+            return permissionGet;
+        }
+        public async Task InsertPermissions(Permission permission)
+        {
+            _n5_DBContext.Permissions.Add(permission);
+            await _n5_DBContext.SaveChangesAsync();
+        }
+        public async Task<bool> UpdatePermissions(Permission Permission)
+        {
+            var currentPermission = await Get(Permission.Id);
+            currentPermission.LastName = Permission.LastName;
+            currentPermission.Name = Permission.Name;
+            currentPermission.IdTypePermission = Permission.IdTypePermission;
+            currentPermission.Date = Permission.Date;
+            int rows=await _n5_DBContext.SaveChangesAsync();
+            return rows > 0; 
+        }
+        public async Task<bool> DeletePermissions(long id)
+        {
+            var currentPermission = await Get(id);
+            _n5_DBContext.Remove(currentPermission);
+            int rows = await _n5_DBContext.SaveChangesAsync();
+            return rows > 0;
+        }
+
     }
 }
