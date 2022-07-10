@@ -7,5 +7,7 @@ namespace N5.Core.Interfaces
     public interface IPermissionRepository
     {
         Task<IEnumerable<Permission>> Get();
+        Task<Permission> Get(int Id);
+        Task InsertPermissions(Permission permission);
     }
 }

@@ -22,5 +22,10 @@ namespace N5.Infrastructure.Repositories
             var permissionGet = await _n5_DBContext.Permissions.ToListAsync();
             return permissionGet;
 ;       }
+        public async Task InsertPermissions(Permission permission)
+        {
+            _n5_DBContext.Permissions.Add(permission);
+            await _n5_DBContext.SaveChangesAsync();
+        }
     }
 }
