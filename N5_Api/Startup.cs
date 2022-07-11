@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using N5.Core.Exceptions;
 using N5.Core.Interfaces;
+using N5.Core.Services;
 using N5.Infrastructure.Data;
 using N5.Infrastructure.Filters;
 using N5.Infrastructure.Repositories;
@@ -28,16 +30,18 @@ namespace N5_Api
         {
             //Mapping Profile
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //Disable ValidationFilter ApiController
-            services.AddControllers(
-                ).ConfigureApiBehaviorOptions(options =>
-                {
-                    options.SuppressModelStateInvalidFilter = true;
-                });
-
+            //Ignore LoopHandling, Disable ValidationFilter ApiController
+            services.AddControllers(options => {
+                options.Filters.Add<GlobalExceptionFilter>();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             //Dependency Injection
             services.AddTransient<IPermissionRepository, PermissionRepository>();
-            services.AddTransient<ITypePermissionRepository, TypePermissionRepository>();
+            services.AddTransient<IPermissionService, PermissionService>();
+            services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             //Connection DB
             services.AddDbContext<N5_DBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("N5Connection"))

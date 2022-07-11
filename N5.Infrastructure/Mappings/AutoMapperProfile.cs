@@ -13,8 +13,9 @@ namespace N5.Infrastructure.Mappings
     {
         public AutoMapperProfile()
         {
-            CreateMap<Permission, PermissionDto>();
-            CreateMap<PermissionDto, Permission>();
+            CreateMap<PermissionEntity, PermissionDto>();
+            CreateMap<PermissionEntity, PermissionFindDto>();
+            CreateMap<PermissionDto, PermissionEntity>();
         }
     }
 }
