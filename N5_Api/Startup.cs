@@ -1,16 +1,18 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using N5.Core.Exceptions;
+using N5.Core.Interfaces;
+using N5.Core.Services;
+using N5.Infrastructure.Data;
+using N5.Infrastructure.Filters;
+using N5.Infrastructure.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace N5_Api
 {
@@ -26,8 +28,31 @@ namespace N5_Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Mapping Profile
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //Ignore LoopHandling, Disable ValidationFilter ApiController
+            services.AddControllers(options => {
+                options.Filters.Add<GlobalExceptionFilter>();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            //Dependency Injection
+            services.AddTransient<IPermissionRepository, PermissionRepository>();
+            services.AddTransient<IPermissionService, PermissionService>();
+            services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            //Connection DB
+            services.AddDbContext<N5_DBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("N5Connection"))
+            );
+            //Configure Validation MVC Model
+            services.AddMvc(options=> {
+                options.Filters.Add <ValidationFilter>();
+            }).AddFluentValidation(options => {
+                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            });
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "N5_Api", Version = "v1" });
