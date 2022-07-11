@@ -19,8 +19,8 @@ namespace N5.Infrastructure.Data
         {
         }
 
-        public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<TypePermission> TypePermissions { get; set; }
+        public virtual DbSet<PermissionEntity> Permissions { get; set; }
+        public virtual DbSet<TypePermissionEntity> TypePermissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

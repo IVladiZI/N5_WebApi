@@ -22,9 +22,6 @@ namespace N5.Infrastructure.Validators
                 .NotNull()
                 .NotEmpty()
                 .NotEqual(0);
-            RuleFor(permission => permission.Date)
-                .NotEmpty()
-                .LessThan(DateTime.Now);
         }
     }
 }

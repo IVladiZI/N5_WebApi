@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace N5.Infrastructure.Data.Configuration
 {
-    public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
+    public class PermissionConfiguration : IEntityTypeConfiguration<PermissionEntity>
     {
-        public void Configure(EntityTypeBuilder<Permission> builder)
+        public void Configure(EntityTypeBuilder<PermissionEntity> builder)
         {
             builder.HasKey(e => e.Id);
 
