@@ -66,11 +66,11 @@ namespace N5.Core.Services
         public async Task<bool> UpdatePermissions(PermissionEntity permissionEntity)
         {
             var permission = await Get(permissionEntity.Id);
-            permission.IdTypePermission = permissionEntity.IdTypePermission;
-            permission.Name = permissionEntity.Name;
-            permission.LastName = permissionEntity.LastName;
             if (permission != null)
             {
+                permission.IdTypePermission = permissionEntity.IdTypePermission;
+                permission.Name = permissionEntity.Name;
+                permission.LastName = permissionEntity.LastName;
                 _unitOfWork.PermissionRepository.Update(permission);
                 await _unitOfWork.SaveChangesAsync();
                 return true;

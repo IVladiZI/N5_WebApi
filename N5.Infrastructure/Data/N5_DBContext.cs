@@ -18,7 +18,6 @@ namespace N5.Infrastructure.Data
             : base(options)
         {
         }
-
         public virtual DbSet<PermissionEntity> Permissions { get; set; }
         public virtual DbSet<TypePermissionEntity> TypePermissions { get; set; }
 
