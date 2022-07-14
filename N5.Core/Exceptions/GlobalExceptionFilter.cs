@@ -27,6 +27,19 @@ namespace N5.Core.Exceptions
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.ExceptionHandled = true;
             }
+            else
+            {
+                var validation = new
+                {
+                    Status = 1,
+                    Title = "Algo salio mal",
+                    Message = context.Exception.Message
+
+                };
+                context.Result = new BadRequestObjectResult(validation);
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.ExceptionHandled = true;
+            }
         }
     }
 }

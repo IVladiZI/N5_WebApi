@@ -117,8 +117,8 @@ namespace N5.UnitTest
             //Asserts
             Assert.NotNull(response);
             var objectResult = Assert.IsType<OkObjectResult>(response);
-            var model = Assert.IsAssignableFrom<Response<IEnumerable<PermissionDto>>>(objectResult.Value);
-            var modelCount = model.Data.Count();
+            var model = Assert.IsAssignableFrom<IEnumerable<PermissionDto>>(objectResult.Value);
+            var modelCount = model.Count();
             Assert.Equal(3, modelCount);
         }
         [Fact, Order(1)]
@@ -134,8 +134,8 @@ namespace N5.UnitTest
             //Assertsa
             Assert.NotNull(response);
             var objectResult = Assert.IsType<OkObjectResult>(response);
-            var model = Assert.IsAssignableFrom<Response<PermissionDto>>(objectResult.Value);
-            Assert.Equal(1, model.Data.Id);
+            var model = Assert.IsAssignableFrom<PermissionDto>(objectResult.Value);
+            Assert.Equal(1, model.Id);
         }
         [Fact, Order(2)]
         public async Task Insert()
@@ -173,13 +173,14 @@ namespace N5.UnitTest
             var response = await controller.Put(permissionDto);
             //Assert
             Assert.NotNull(response);
-            Assert.IsType<BadRequestObjectResult>(response);
+            var objectResult = Assert.IsType<OkObjectResult>(response);
+            Assert.IsAssignableFrom<bool>(objectResult.Value);
             permissionDto.Id = 1;
             response = await controller.Put(permissionDto);
             Assert.NotNull(response);
-            var objectResult = Assert.IsType<OkObjectResult>(response);
-            var model = Assert.IsAssignableFrom<Response<bool>>(objectResult.Value);
-            Assert.True(model.Data);
+            objectResult = Assert.IsType<OkObjectResult>(response);
+            var model = Assert.IsAssignableFrom<bool>(objectResult.Value);
+            Assert.True(model);
         }
         [Fact, Order(4)]
         public async Task Delete()

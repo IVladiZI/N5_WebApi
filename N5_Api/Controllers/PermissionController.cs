@@ -27,24 +27,14 @@ namespace N5.Api.Controllers
         {
             var getPermission = _permissionService.Get();
             var permissionDto = _mapper.Map<IEnumerable<PermissionDto>>(getPermission);
-            return Ok(new Response<IEnumerable<PermissionDto>>(permissionDto)
-            {
-                State = 0,
-                Data = permissionDto,
-                Message = "Solicitud Correcta"
-            });
+            return Ok(permissionDto);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var getPermission = await _permissionService.Get(id);
             var permissionDto = _mapper.Map<PermissionDto>(getPermission);
-            return Ok(new Response<PermissionDto>(permissionDto)
-            {
-                State = 0,
-                Data = permissionDto,
-                Message = "Solicitud Correcta"
-            });
+            return Ok(permissionDto);
         }
 
         [HttpPost("find")]
@@ -52,12 +42,7 @@ namespace N5.Api.Controllers
         {
             var getPermission = await _permissionService.Find(permissionFindDto);
             var permissionDto = _mapper.Map<IEnumerable<PermissionDto>>(getPermission);
-            return Ok(new Response<IEnumerable<PermissionDto>>(permissionDto)
-            {
-                State = 0,
-                Data = permissionDto,
-                Message = "Solicitud Correcta"
-            });
+            return Ok(permissionDto);
         }
 
         [HttpPost]
@@ -67,12 +52,7 @@ namespace N5.Api.Controllers
             await _permissionService.InsertPermissions(permission);
             permissionDto = _mapper.Map<PermissionDto>(permission);
 
-            return Ok(new Response<PermissionDto>(permissionDto)
-            {
-                State = 0,
-                Data = permissionDto,
-                Message = "Solicitud Correcta"
-            });
+            return Ok(permissionDto);
         }
 
         [HttpPut]
@@ -80,47 +60,14 @@ namespace N5.Api.Controllers
         {
             var permission = _mapper.Map<PermissionEntity>(permissionDto);
             var result = await _permissionService.UpdatePermissions(permission);
-            if (result)
-            {
-                return Ok(new Response<bool>(result)
-                {
-                    State = 0,
-                    Data = result,
-                    Message = "Solicitud Correcta"
-                });
-            }
-            else
-            {
-                return BadRequest(new Response<bool>(result)
-                {
-                    State = 1,
-                    Data = result,
-                    Message = "No se existe el Usuario"
-                });
-            }
+            return Ok(result);
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _permissionService.DeletePermissions(id);
-            if (result)
-            {
-                return Ok(new Response<bool>(result) {
-                    State = 0,
-                    Data = result,
-                    Message = "Solicitud Correcta"
-                });
-            }
-            else
-            {
-                return BadRequest(new Response<bool>(result)
-                {
-                    State = 1,
-                    Data = result,
-                    Message = "No se existe el Usuario"
-                });
-            }
+            return Ok(result);
         }
     }
 }
