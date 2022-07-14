@@ -28,6 +28,7 @@ namespace N5_Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             //Mapping Profile
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //Ignore LoopHandling, Disable ValidationFilter ApiController
@@ -52,7 +53,7 @@ namespace N5_Api
             }).AddFluentValidation(options => {
                 options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             });
-
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "N5_Api", Version = "v1" });
@@ -62,6 +63,11 @@ namespace N5_Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => {
+                options.WithOrigins("http://127.0.0.1:5173");
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -18,7 +18,7 @@ namespace N5.Infrastructure.Validators
             RuleFor(permission => permission.LastName)
                 .NotNull()
                 .Length(3, 29);
-            RuleFor(permission => permission.IdTypePermission)
+             RuleFor(permission => permission.IdTypePermission)
                 .NotNull()
                 .NotEmpty()
                 .NotEqual(0);

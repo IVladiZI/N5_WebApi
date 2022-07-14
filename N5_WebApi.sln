@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Api", "N5_Api\N5.Api.csproj", "{2BC3DF99-89E3-4F3F-B4A7-4315F7AE4D99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5.Api", "N5_Api\N5.Api.csproj", "{2BC3DF99-89E3-4F3F-B4A7-4315F7AE4D99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Core", "N5.Core\N5.Core.csproj", "{FC18E7CE-6CAB-4E4C-9B2E-F5C468EDD320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5.Core", "N5.Core\N5.Core.csproj", "{FC18E7CE-6CAB-4E4C-9B2E-F5C468EDD320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Infrastructure", "N5.Infrastructure\N5.Infrastructure.csproj", "{92DE7BD6-066B-4858-9547-E8F057752C8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5.Infrastructure", "N5.Infrastructure\N5.Infrastructure.csproj", "{92DE7BD6-066B-4858-9547-E8F057752C8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{CF94A59A-E66F-418C-80CE-9F79D2B39771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.UnitTest", "N5.UnitTest\N5.UnitTest.csproj", "{4F2E5466-B061-4507-AC3F-ECBA4F551676}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.IntegrationTest", "N5.IntegrationTest\N5.IntegrationTest.csproj", "{FDD0D59A-C928-4271-8BB7-892FE919A57A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5.UnitTest", "N5.UnitTest\N5.UnitTest.csproj", "{4F2E5466-B061-4507-AC3F-ECBA4F551676}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,17 +35,12 @@ Global
 		{4F2E5466-B061-4507-AC3F-ECBA4F551676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F2E5466-B061-4507-AC3F-ECBA4F551676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F2E5466-B061-4507-AC3F-ECBA4F551676}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDD0D59A-C928-4271-8BB7-892FE919A57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDD0D59A-C928-4271-8BB7-892FE919A57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDD0D59A-C928-4271-8BB7-892FE919A57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDD0D59A-C928-4271-8BB7-892FE919A57A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4F2E5466-B061-4507-AC3F-ECBA4F551676} = {CF94A59A-E66F-418C-80CE-9F79D2B39771}
-		{FDD0D59A-C928-4271-8BB7-892FE919A57A} = {CF94A59A-E66F-418C-80CE-9F79D2B39771}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6AFD2AD-B9C1-4B03-9084-BFAF1777A50E}
